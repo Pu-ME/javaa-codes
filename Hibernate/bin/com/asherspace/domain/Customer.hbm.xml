@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+ <hibernate-mapping >
+ 	<class name="com.asherspace.domain.Customer" table="t_customer">
+ 		<id name="cid" column="id">
+ 			<generator class="native"></generator>
+ 		</id>
+ 		<property name="name" type="string" column="name"></property>
+ 		<!-- 表达一对多的集合 -->
+ 		<!-- true:不维护 false:维护     默认为false -->
+		<set name="orders"   >
+			<!-- key:描述外键 column:外键的值 -->
+			<key column="cid"></key>
+			<one-to-many class="com.asherspace.domain.Order"/>
+		</set>
+ 	</class>
+ </hibernate-mapping>

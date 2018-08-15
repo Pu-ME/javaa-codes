@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- #1 常量 -->
+	<!-- 1.1开发模式 -->
+	<constant name="struts.devMode" value="true"></constant>
+	<!-- 1.2标签主题，简单风格 -->
+	<constant name="struts.ui.theme" value="simple"></constant>
+	
+	<!-- #2 公共项 -->
+	<package name="common" namespace="/" extends="struts-default">
+		<interceptors>
+			<!-- 注册拦截器 -->
+			<interceptor name="loginInterceptor" class="com.asher.crm.web.interceptor.LoginInterceptor"></interceptor>
+			<!-- 自定义拦截器栈 -->
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="defaultStack">
+					<param name="fileUpload.allowedExtensions">.xls,.xlsx</param>
+				</interceptor-ref>
+				<interceptor-ref name="loginInterceptor">
+					<param name="excludeMethods">login</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+	    <!-- 将自定义拦截器栈配置为默认拦截器栈 -->
+   		 <default-interceptor-ref name="loginStack"></default-interceptor-ref> 
+    	<global-results>
+    		<result name="login">/WEB-INF/pages/login.jsp</result>
+    		<result name="error">/WEB-INF/pages/error.jsp</result>
+			<result name="input">/WEB-INF/pages/error.jsp</result>
+    	</global-results>
+    	
+		<action name="uiAction_*_*">
+			<result>/WEB-INF/pages/{1}/{2}.jsp</result>
+		</action>
+	</package>
+	
+	
+	<!--  加载其他配置文件 -->
+	<!--  员工 -->
+	<include file="struts/struts-staff.xml"></include>
+	<!--  职务 -->
+	<include file="struts/struts-post.xml"></include>
+	<!-- 课程类别-->
+	<include file="struts/struts-coursetype.xml"></include>
+	<!-- 班级 -->
+	<include file="struts/struts-classes.xml"></include>
+	<!-- 部门 -->
+	<include file="struts/struts-department.xml"></include>
+</struts>

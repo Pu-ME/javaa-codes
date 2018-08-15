@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="true"></constant>
+	<package name="default"  extends="struts-default">
+		<!-- 配置拦截器 -->
+		<interceptors>
+			<!-- 声明（注册）拦截器 -->
+			<interceptor name="myInterceptor" class="com.asher.web.interceptor.MyInterceptor"></interceptor>
+			<!-- 自定义拦截器栈 -->
+			<interceptor-stack name="myInterceptorStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<!-- 对某些不需要拦截的方法，需要通过参数注入进行配置 
+					* excludeMethods ： 配置不需要拦截的方法
+					* methodName: 需要配置的方法名称，多个方法名称之间需要以","隔开。
+				-->
+				<interceptor-ref name="myInterceptor">
+					<param name="excludeMethods">methodName</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 将自定义拦截器栈配置为默认拦截器栈 -->
+	    <default-interceptor-ref name="myInterceptorStack"></default-interceptor-ref>
+	
+	
+		<action name="userAction_*" class="com.asher.web.action.UserAction" method="{1}">
+		 <result name="success">/msg.jsp</result>
+		</action>
+	</package>
+
+</struts>

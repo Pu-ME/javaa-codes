@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 员工配置 -->
+	<package name="sta" namespace="/" extends="common">
+		<action name="staffAction_*" class="com.asher.crm.staff.web.action.StaffAction" method="{1}">
+			<!-- 1.登录成功 -->
+			<result name="success" type="redirectAction">staffAction_home</result>
+			<!-- 2.首页 -->
+			<result name="home">/WEB-INF/pages/frame.jsp</result>
+			<!-- 3.查询所有 -->
+			<result name="findAll">/WEB-INF/pages/staff/listStaff.jsp</result>
+			<!-- 4.编辑前显示 -->
+			<result name="editUI">/WEB-INF/pages/staff/editStaff.jsp</result>
+			<!-- 5.编辑后显示 -->
+			<result name="edit" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">staffAction_findAll</param>
+			</result>
+			<!-- 6.添加前显示 -->
+			<result name="addUI">/WEB-INF/pages/staff/addStaff.jsp</result>
+			<!-- 7.添加后显示 -->
+			<result name="add" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">staffAction_findAll</param>
+			</result>
+			<!-- 8.重新登陆 -->
+			<result name="logout">/WEB-INF/pages/frame.jsp</result>
+		</action>
+	</package>
+	
+</struts>

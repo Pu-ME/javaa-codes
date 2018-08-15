@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+          
+   <!--  <bean id="userDao" class="com.asher.test02.MyFactory" factory-method="createUserDao"></bean> -->    
+   <!-- <bean id="myFactory" class="com.asher.test02.MyFactory"></bean> -->
+   <!-- <bean id="userDao" factory-bean="myFactory" factory-method="createUserDao"></bean> -->
+   
+   <bean id="userDao" class="com.asher.test02.UserDaoImpl" init-method="myInit" destroy-method="myDestory"></bean>
+   <!-- 后处理bean -->
+   <bean class="com.asher.test02.MyPostProcessor" ></bean>
+</beans>

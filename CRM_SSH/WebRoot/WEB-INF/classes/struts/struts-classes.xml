@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 员工配置 -->
+	<package name="cla" namespace="/" extends="common">
+		<action name="classesAction_*" class="com.asher.crm.classes.web.action.ClassesAction" method="{1}">
+			<result name="findAll">/WEB-INF/pages/classes/listClass.jsp</result>
+			<result name="uploadUI">/WEB-INF/pages/classes/uploadClass.jsp</result>
+			<result name="upload" type="redirectAction">classesAction_findAll</result>
+			<result name="input">/WEB-INF/pages/error.jsp</result>
+			<!-- 下载 -->
+			<result name="download" type="stream">
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename=${downloadFileName}</param>
+			</result>
+			<result name="addOrEditUI">/WEB-INF/pages/classes/addOrEditClass.jsp</result>
+			<result name="addOrEdit" type="redirectAction">classesAction_findAll</result>
+			<result name="showClass">/WEB-INF/pages/classes/showClass.jsp</result>
+		</action>
+	</package>
+	
+	
+</struts>

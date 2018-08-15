@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 员工配置 -->
+	<package name="dep" namespace="/" extends="common">
+		<action name="departmentAction_*" class="com.asher.crm.department.web.action.DepartmentAction" method="{1}">
+			<!-- 1.显示部门 -->
+			<result name="findAll">/WEB-INF/pages/department/listDepartment.jsp</result>
+			<!-- 2.添加后修改操作前 -->
+			<result name="addOrEditUI">/WEB-INF/pages/department/addOrEditDepartment.jsp</result>
+			<!-- 3.添加后修改操作后 -->
+			<result name="addOrEdit" type="redirectAction">departmentAction_findAll</result>
+		</action>
+	</package>
+	
+</struts>
